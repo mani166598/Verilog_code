@@ -1,0 +1,21 @@
+module seq_tb101();
+reg clk,in,reset;
+wire y;
+
+seq101 dut(clk,in,reset,y);
+initial
+{clk,in,reset}=3'b001;
+always #5 clk=~clk;
+
+initial 
+begin
+$monitor ($time,"reset=%b,clk=%b,in=%b,y=%b",reset,clk,in,y);
+#10 reset=0;in=1;
+#10 in=0;
+#10 in=1;
+#10 in=0;
+#10 in=1;
+#10 in=1;
+#10 $stop;
+end 
+endmodule
